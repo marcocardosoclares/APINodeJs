@@ -14,7 +14,7 @@ class UserController {
 
     static async show(req, res) {
         try {
-            const user = await userServices.show(req.params.id);
+            const user = await userServices.find(req.params.id);
             return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -23,8 +23,7 @@ class UserController {
 
     static async store(req, res) {
         const {name, email, password } = req.body;
-        console.log(password)
-        const hashPass = bcrypt.hash(password, 12)
+        const hashPass = await bcrypt.hash(password, 12)
         try {
             const newUser = await userServices.store({name, email, password: hashPass});
             return res.status(201).json(newUser);
@@ -38,7 +37,7 @@ class UserController {
         const { id } = req.params;
         try {
             await userServices.update(updatedData,id);
-            const updatedUser = await userServices.show(id);
+            const updatedUser = await userServices.find(id);
             return res.status(200).json(updatedUser);
         } catch (error) {
             return res.status(500).json({ error: error.message });

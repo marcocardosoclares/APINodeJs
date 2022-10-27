@@ -6,7 +6,7 @@ class AuthorServices extends Services {
     }
 
     async books(id) {
-        const author = await super.show(id);
+        const author = await super.find(id);
         return await author.getBooks();
     }
 }

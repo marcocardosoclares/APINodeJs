@@ -13,7 +13,7 @@ class PublisherController {
 
     static async show(req, res) {
         try {
-            const publisher = await publisherServices.show(req.params.id);
+            const publisher = await publisherServices.find(req.params.id);
             return res.status(200).json(publisher);
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -34,7 +34,7 @@ class PublisherController {
         const { id } = req.params;
         try {
             await publisherServices.update(updatedData,id);
-            const updatedPublisher = await publisherServices.show(id);
+            const updatedPublisher = await publisherServices.find(id);
             return res.status(200).json(updatedPublisher);
         } catch (error) {
             return res.status(500).json({ error: error.message });

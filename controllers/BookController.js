@@ -13,7 +13,7 @@ class BookController {
 
     static async show(req, res) {
         try {
-            const book = await bookServices.show(req.params.id);
+            const book = await bookServices.find(req.params.id);
             return res.status(200).json(book);
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -34,7 +34,7 @@ class BookController {
         const { id } = req.params;
         try {
             await bookServices.update(updatedData,id);
-            const updatedBook = await bookServices.show(id);
+            const updatedBook = await bookServices.find(id);
             return res.status(200).json(updatedBook);
         } catch (error) {
             return res.status(500).json({ error: error.message });

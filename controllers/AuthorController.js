@@ -13,7 +13,7 @@ class AuthorController {
 
     static async show(req, res) {
         try {
-            const author = await authorServices.show(req.params.id);
+            const author = await authorServices.find(req.params.id);
             return res.status(200).json(author);
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -34,7 +34,7 @@ class AuthorController {
         const { id } = req.params;
         try {
             await authorServices.update(updatedData,id);
-            const updatedAuthor = await authorServices.show(id);
+            const updatedAuthor = await authorServices.find(id);
             return res.status(200).json(updatedAuthor);
         } catch (error) {
             return res.status(500).json({ error: error.message });

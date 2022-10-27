@@ -9,12 +9,12 @@ class Services {
         return database[this.model].findAll({ where });
     }
 
-    async show(id) {
-        return database[this.model].findOne({ where: { id } });
+    async find(column) {
+        return database[this.model].findOne({ where: column });
     }
 
-    async store(newrecord) {
-        return database[this.model].create(newrecord);
+    async store(newRecord) {
+        return database[this.model].create(newRecord);
     }
 
     async update(UpdatedData, id, transaction = {}) {
